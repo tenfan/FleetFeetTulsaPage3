@@ -41,8 +41,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UIBarButtonItem *LoadClassesButton = [[UIBarButtonItem alloc] initWithTitle:@"Classes" style:UIBarButtonItemStylePlain target:self action:@selector(LoadClasses:)];
+    self.navigationItem.rightBarButtonItem = LoadClassesButton;
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+    [LoadClassesButton release];
+    
+    [self showLoadingIndicator];
+
     [self fetchCustomers];
      self.title = @"Students";
+    
+    [self hideLoadingIndicator];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -208,6 +217,12 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+}
+
+-(void) LoadClasses: (id)sender
+
 {
     // Navigation logic may go here. Create and push another view controller.
    
